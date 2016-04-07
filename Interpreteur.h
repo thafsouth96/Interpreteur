@@ -35,7 +35,10 @@ private:
                            //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); //<instTantQue> ::= tant que (<expression> <seqInst> fintantque   
+    Noeud*  instPour () ; //<instPour> ::= pour [<affectation>] ; <expression> ; [<affectation>] ) <seqInst> finpour 
+    Noeud*  instRepeter () ; // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     
+
     
     
     // outils pour simplifier l'analyse syntaxique

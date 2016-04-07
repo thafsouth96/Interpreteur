@@ -9,5 +9,10 @@ procedure principale()
   tantque (z<7) 
     z = z+1 ;
   fintantque 
+    
+  b = 16 ;   
+  repeter
+      b = b-1 ; 
+  jusqua (b==1)
 finproc
 # Commentaire Final

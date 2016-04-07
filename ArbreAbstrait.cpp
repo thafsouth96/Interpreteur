@@ -94,3 +94,16 @@ int NoeudInstTantQue::executer() {
   }
   return 0; // La valeur renvoyée ne représente rien !
 }
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence , Noeud* condition)
+:m_sequence(sequence),m_condition(condition) {
+}
+
+int NoeudInstRepeter::executer(){
+
+    do{
+        m_sequence->executer() ;
+    } while (!m_condition->executer()) ; 
+    return 0 ; 
+}
+

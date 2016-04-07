@@ -94,4 +94,25 @@ class NoeudInstTantQue : public Noeud {
 
 }; 
 
+class NoeudInstRepeter : public Noeud {
+    
+        public : 
+            NoeudInstRepeter (Noeud* sequence , Noeud* condition) ; 
+            ~NoeudInstRepeter (){} ; 
+            int executer() ; 
+      
+        private:
+            Noeud*  m_sequence;
+            Noeud*  m_condition;
+}; 
+
+class NoeudInstPour : public Noeud {
+
+public : 
+    NoeudInstPour() 
+
+
+
+}
+
 #endif /* ARBREABSTRAIT_H */
