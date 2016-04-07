@@ -5,5 +5,9 @@ procedure principale()
   si (i>14)
     j=1;
   finsi
+  z = 0 ; 
+  tantque (z<7) 
+    z = z+1 ;
+  fintantque 
 finproc
 # Commentaire Final
