@@ -109,8 +109,17 @@ class NoeudInstRepeter : public Noeud {
 class NoeudInstPour : public Noeud {
 
 public : 
-    NoeudInstPour() 
+    NoeudInstPour(Noeud* initialisation , Noeud* expression, Noeud*  iteration, Noeud* sequence) ;
+    //condition et iteration sont des affectation 
+    ~NoeudInstPour() ; 
+    int executer();
 
+private:
+    Noeud* m_initialisation ; 
+    Noeud* m_condition ; 
+    Noeud* m_iteration ;
+    Noeud* m_sequence ; 
+    
 
 
 }

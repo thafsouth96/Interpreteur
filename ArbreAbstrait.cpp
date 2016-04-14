@@ -99,6 +99,15 @@ NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence , Noeud* condition)
 :m_sequence(sequence),m_condition(condition) {
 }
 
+NoeudInstPour::NoeudInstPour(Noeud* initialisation, Noeud* expression, Noeud* iteration, Noeud* sequence):
+m_initialisation(initialisation),
+m_condition(expression),
+m_iteration(iteration),
+m_sequence(sequence){
+}
+
+
+
 int NoeudInstRepeter::executer(){
 
     do{

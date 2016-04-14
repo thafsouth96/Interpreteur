@@ -78,6 +78,8 @@ Noeud* Interpreteur::inst() {
   
   else if (m_lecteur.getSymbole() == "repeter")
       return instRepeter() ; 
+  else if (m_lecteur.getSymbole() == "pour") 
+      return instPour() ; 
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
   else erreur("Instruction incorrecte");
 }
@@ -158,7 +160,7 @@ Noeud* Interpreteur::instTantQue() {
 }
 
 Noeud* Interpreteur::instRepeter(){
-    
+    //<instRepeter> ::= repeter <seqInst> jusqua ( <expression> )
     testerEtAvancer("repeter");
     Noeud* sequence = seqInst () ;
     testerEtAvancer("jusqua") ; 
@@ -171,23 +173,37 @@ Noeud* Interpreteur::instRepeter(){
 }
 
 Noeud* Interpreteur::instPour() {
+   //<instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
     testerEtAvancer ("pour") ;
     testerEtAvancer ("(") ; 
+    Noeud* initialisation  ;
+    Noeud* iteration  ; 
     try{
-    Noeud* initialisation = affectation () ;
+        initialisation = affectation () ;
     } catch (const exception e) {
-        Noeud* initialisation = nullptr;
+        initialisation = nullptr;
     }
+    /*if (m_lecteur.getSymbole() == "<VARIABLE>"){
+    
+      initialisation = affectation() ;   //variable 
+    }*/
+    testerEtAvancer(";") ;   
+    Noeud* condition = expression () ;
     testerEtAvancer(";") ; 
-    Noeud condition = expression () ;
-    testerEtAvancer(";") ; 
+    /*if(m_lecteur.getSymbole() == "<VARIABLE>"){
+       iteration = affectation (); //incrementation ou décrémentation
+    }*/
+    
     try{
-    Noeud iteration = affectation() ;
+        iteration = affectation() ;
     } catch (const exception e) {
-        Noeud iteration = nullptr;
+        iteration = nullptr;
     }
-    //return new NoeudInstPour() ; 
-    return nullptr; 
+    testerEtAvancer(")") ; 
+    Noeud* sequence = seqInst(); 
+    testerEtAvancer("finpour");
+    return new NoeudInstPour(initialisation,condition,iteration,sequence) ; 
+    //return nullptr; 
 
 
 }

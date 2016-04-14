@@ -14,5 +14,11 @@ procedure principale()
   repeter
       b = b-1 ; 
   jusqua (b==1)
+
+  c = 2;
+  pour (a=1; a<=3; a=a+1)
+    c= c * c ;
+  finpour
+
 finproc
 # Commentaire Final
