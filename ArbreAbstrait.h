@@ -111,7 +111,7 @@ class NoeudInstPour : public Noeud {
 public : 
     NoeudInstPour(Noeud* initialisation , Noeud* expression, Noeud*  iteration, Noeud* sequence) ;
     //condition et iteration sont des affectation 
-    ~NoeudInstPour() ; 
+    ~NoeudInstPour(){}; 
     int executer();
 
 private:
@@ -122,6 +122,20 @@ private:
     
 
 
-}
+};
+
+class NoeudInstEcrire : public Noeud {
+
+public:
+    NoeudInstEcrire(); 
+    ~NoeudInstEcrire(){} ; 
+    int executer(); 
+    void ajouter(Noeud* n ) ; 
+    
+private :
+    vector<Noeud*> m_expressions ;
+
+
+};
 
 #endif /* ARBREABSTRAIT_H */

@@ -3,6 +3,7 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include <typeinfo>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -99,14 +100,6 @@ NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence , Noeud* condition)
 :m_sequence(sequence),m_condition(condition) {
 }
 
-NoeudInstPour::NoeudInstPour(Noeud* initialisation, Noeud* expression, Noeud* iteration, Noeud* sequence):
-m_initialisation(initialisation),
-m_condition(expression),
-m_iteration(iteration),
-m_sequence(sequence){
-}
-
-
 
 int NoeudInstRepeter::executer(){
 
@@ -116,3 +109,32 @@ int NoeudInstRepeter::executer(){
     return 0 ; 
 }
 
+
+NoeudInstPour::NoeudInstPour(Noeud* initialisation, Noeud* expression, Noeud* iteration, Noeud* sequence): m_initialisation(initialisation),m_condition(expression),m_iteration(iteration),m_sequence(sequence){}
+
+int NoeudInstPour::executer(){
+    for(m_initialisation->executer();m_condition->executer();m_iteration->executer()){
+    
+        m_sequence->executer();
+    }
+    
+}
+
+
+NoeudInstEcrire::NoeudInstEcrire():m_expressions(){
+}
+void NoeudInstEcrire::ajouter(Noeud* n ){
+    m_expressions.push_back(n) ; 
+
+}
+
+int NoeudInstEcrire::executer(){
+    for(Noeud* p : m_expressions){
+        if (typeid(*p)==typeid(SymboleValue) && *((SymboleValue*)p)== "<CHAINE>")
+        cout << ((SymboleValue*)p)->getChaine() << endl;
+        else {
+          cout << p->executer() << endl ; 
+        }
+    }
+    return 0 ; 
+}

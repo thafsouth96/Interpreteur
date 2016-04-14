@@ -17,8 +17,10 @@ procedure principale()
 
   c = 2;
   pour (a=1; a<=3; a=a+1)
-    c= c * c ;
+    c= c + 1 ;
   finpour
+
+  ecrire("c = ")
 
 finproc
 # Commentaire Final
