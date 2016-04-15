@@ -20,7 +20,13 @@ procedure principale()
     c= c + 1 ;
   finpour
 
-  ecrire("c = ", c )
+  nbInt = 2;
+  ecrire("Ecrivez ", nbInt, " entiers : ")
+
+  lire(rep1,rep2)
+  ecrire("Vous avez écrit ", rep1, " et ", rep2)
+
+  
 
 finproc
 # Commentaire Final

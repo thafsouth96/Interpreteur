@@ -143,7 +143,7 @@ public:
     NoeudInstLire(); 
     ~NoeudInstLire(){} ; 
     int executer(); 
-    void ajouter(Noeud* n ) ; 
+    void ajouter(Noeud* n); 
     
 private :
     vector<Noeud*> m_variables ;

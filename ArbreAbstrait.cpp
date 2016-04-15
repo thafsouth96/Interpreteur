@@ -144,16 +144,21 @@ int NoeudInstEcrire::executer(){
 NoeudInstLire::NoeudInstLire(): m_variables() {}
 
 void NoeudInstLire::ajouter(Noeud* n){
-    m_variables.push_back(n)
+    m_variables.push_back(n);
 }
 
 int NoeudInstLire::executer(){
     for(Noeud* p : m_variables){
-        if (((SymboleValue*)p) == "<CHAINE>")){
-            string val;
-        }
-        else 
-        cin >> ;
+        //string valS;
+        int valI;
+        //if (*((SymboleValue*)p) == "<CHAINE>"){
+            cin >> valI;
+            ((SymboleValue*)p)->setValeur(valI);
+        //}
+        //else {
+        //    cin >> valS;
+        //    ((SymboleValue*)p)->setValeur(valS);
+        //}
     }
     return 0 ; 
 }

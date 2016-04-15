@@ -250,7 +250,7 @@ Noeud* Interpreteur::instLire() {
     testerEtAvancer("(");
     
     Noeud* variable;
-    Noeud* variableV = new NoeudInstLire();
+    NoeudInstLire* variableV = new NoeudInstLire();
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
         variable = m_table.chercheAjoute(m_lecteur.getSymbole());
         variableV->ajouter(variable);
@@ -265,7 +265,7 @@ Noeud* Interpreteur::instLire() {
         }
     }
     testerEtAvancer(")");
-    return nullptr;
+    return variableV;
 }
 
 
