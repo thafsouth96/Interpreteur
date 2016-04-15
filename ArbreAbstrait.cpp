@@ -130,10 +130,12 @@ void NoeudInstEcrire::ajouter(Noeud* n ){
 
 int NoeudInstEcrire::executer(){
     for(Noeud* p : m_expressions){
-        if (typeid(*p)==typeid(SymboleValue) && *((SymboleValue*)p)== "<CHAINE>")
-        cout << ((SymboleValue*)p)->getChaine() << endl;
+        if (typeid(*p)==typeid(SymboleValue) && *((SymboleValue*)p)== "<CHAINE>"){
+            string chaine = ((SymboleValue*)p)->getChaine();
+            cout << chaine.substr(1,chaine.length()-2);
+        }
         else {
-          cout << p->executer() << endl ; 
+            cout << p->executer(); 
         }
     }
     return 0 ; 

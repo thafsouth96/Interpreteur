@@ -20,7 +20,7 @@ procedure principale()
     c= c + 1 ;
   finpour
 
-  ecrire("c = ")
+  ecrire("c = ", c )
 
 finproc
 # Commentaire Final

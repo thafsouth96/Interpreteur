@@ -216,36 +216,28 @@ Noeud* Interpreteur::instEcrire() {
     Noeud* exp = nullptr ; 
 
     if (m_lecteur.getSymbole() == "<CHAINE>") {
+        //cout << "ICI : " << m_lecteur.getSymbole() << endl;
         chaine = m_table.chercheAjoute(m_lecteur.getSymbole());
-        expV->ajouter(chaine); 
+        expV->ajouter(chaine);
+        m_lecteur.avancer();
     } else {
         exp = expression() ; 
         expV->ajouter(exp) ; 
               
     }
-    //m_lecteur.avancer();
-    try{
-    testerEtAvancer(",");
-    } catch (const exception e) {
-        testerEtAvancer(")");
-        return expV;
-    }
     while (m_lecteur.getSymbole() == ","){
-        
+        m_lecteur.avancer();
         if (m_lecteur.getSymbole() == "<CHAINE>") {
             chaine = m_table.chercheAjoute(m_lecteur.getSymbole());
             expV->ajouter(chaine);
+            m_lecteur.avancer();
         } else {
+            cout << "ICI : " << m_lecteur.getSymbole() << endl;
            exp = expression() ; 
-           expV->ajouter(exp) ; 
+           expV->ajouter(exp) ;
         }
-         m_lecteur.avancer();
-        try{
-    testerEtAvancer(",");
-    } catch (const exception e) {
-        testerEtAvancer(")");
-        return expV;
-    }
+         //m_lecteur.avancer();
+         cout << "ICI : " << m_lecteur.getSymbole() << endl;
     }
     testerEtAvancer(")"); 
     return expV ; 
