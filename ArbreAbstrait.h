@@ -138,4 +138,15 @@ private :
 
 };
 
+class NoeudInstLire : public Noeud {
+public:
+    NoeudInstLire(); 
+    ~NoeudInstLire(){} ; 
+    int executer(); 
+    void ajouter(Noeud* n ) ; 
+    
+private :
+    vector<Noeud*> m_variables ;
+};
+
 #endif /* ARBREABSTRAIT_H */

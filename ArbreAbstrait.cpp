@@ -140,3 +140,21 @@ int NoeudInstEcrire::executer(){
     }
     return 0 ; 
 }
+
+NoeudInstLire::NoeudInstLire(): m_variables() {}
+
+void NoeudInstLire::ajouter(Noeud* n){
+    m_variables.push_back(n)
+}
+
+int NoeudInstLire::executer(){
+    for(Noeud* p : m_variables){
+        if (((SymboleValue*)p) == "<CHAINE>")){
+            string val;
+        }
+        else 
+        cin >> ;
+    }
+    return 0 ; 
+}
+

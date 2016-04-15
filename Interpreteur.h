@@ -38,6 +38,7 @@ private:
     Noeud*  instPour();   //     <instPour> ::= pour [<affectation>] ; <expression> ; [<affectation>] ) <seqInst> finpour 
     Noeud*  instRepeter();  //<instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     Noeud*  instEcrire();   // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
+    Noeud*  instLire();
 
     
     
