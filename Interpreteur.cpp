@@ -350,6 +350,18 @@ Noeud* Interpreteur::instLire() {
     return variableV;
 }
 
+void Interpreteur::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation) << " " << "#include <iostream>" << endl << "using namespace std" << endl;
+    cout << setw(4*indentation) << " " << "int main() {" << endl;
+    vector<SymboleValue*> table = getTable().getTable();
+    for (SymboleValue* s : table){
+        if (*s=="<VARIABLE>") cout << "int " << s->getChaine() << "; ";
+    }
+    cout << endl;
+    getArbre()->traduitEnCPP(cout, indentation+1);
+    cout << setw(4*(indentation+1)) << "" << "return 0;" << endl;
+    cout << setw(4*indentation) << "}" << endl;
+}
 
 
 

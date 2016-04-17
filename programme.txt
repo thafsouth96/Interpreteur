@@ -16,9 +16,9 @@ procedure principale()
   jusqua (b==1)
 
   c = 2;
-  pour (a=1; a<=3; a=a+1)
-    c= c + 1 ;
-  finpour
+  #pour (a=1; a<=3; a=a+1)
+    #c= c + 1 ;
+  #finpour
 
   nbInt = 2;
   ecrire("Ecrivez ", nbInt, " entiers : ")

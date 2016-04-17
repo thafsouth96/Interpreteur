@@ -18,6 +18,8 @@ public:
     inline unsigned int getTaille() const {
         return m_table.size();
     } // Taille de la table des symboles valués
+    
+    inline const vector<SymboleValue*> getTable() const {return m_table;}
 
     inline const SymboleValue & operator[](unsigned int i) const {
         return *m_table[i];
