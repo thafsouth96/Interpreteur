@@ -5,7 +5,7 @@
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
-m_lecteur(fichier), m_table(), m_arbre(nullptr) {
+m_lecteur(fichier), m_table(), m_arbre(nullptr), m_syntaxError(false) {
 }
 
 void Interpreteur::analyse() {
@@ -49,6 +49,7 @@ Noeud* Interpreteur::programme() {
     Noeud* sequence = seqInst();
     testerEtAvancer("finproc");
     tester("<FINDEFICHIER>");
+    if (m_syntaxError) return nullptr;
     return sequence;
 }
 
@@ -141,11 +142,17 @@ Noeud* Interpreteur::facteur() {
 Noeud* Interpreteur::instSi() {
     // <instSi> ::= si ( <expression> ) <seqInst> finsi
     testerEtAvancer("si");
-    testerEtAvancer("(");
+    try {
+        testerEtAvancer("(");
+    } catch (SyntaxeException & e){
+        m_syntaxError = true;
+        m_lecteur.avancer();
+    }
     Noeud* condition = expression(); // On mémorise la condition
     testerEtAvancer(")");
     Noeud* sequence = seqInst(); // On mémorise la séquence d'instruction
     testerEtAvancer("finsi");
+    if (m_syntaxError) return nullptr;
     return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
 }
 
