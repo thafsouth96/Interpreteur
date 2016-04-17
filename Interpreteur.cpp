@@ -67,23 +67,107 @@ Noeud* Interpreteur::seqInst() {
 Noeud* Interpreteur::inst() {
     // <inst> ::= <affectation>  ; | <instSi>
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        Noeud *affect = affectation();
+        Noeud* affect;
+        try {
+        affect = affectation();
         testerEtAvancer(";");
+        } catch (SyntaxeException & e) {
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>") {
+                
+                m_lecteur.avancer();
+                cout << m_lecteur.getSymbole() << endl;
+            }
+        }
         return affect;
-    } else if (m_lecteur.getSymbole() == "si")
-        return instSi();
+    } else if (m_lecteur.getSymbole() == "si") {
+        Noeud* inst;
+        try {
+            inst = instSi();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+                cout << m_lecteur.getSymbole() << endl;
+                m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
 
-    else if (m_lecteur.getSymbole() == "tantque")
-        return instTantQue();
+    else if (m_lecteur.getSymbole() == "tantque") {
+        Noeud* inst;
+        try {
+            inst = instTantQue();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+               m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
 
-    else if (m_lecteur.getSymbole() == "repeter")
-        return instRepeter();
-    else if (m_lecteur.getSymbole() == "pour")
-        return instPour();
-    else if (m_lecteur.getSymbole() == "ecrire")
-        return instEcrire();
-    else if (m_lecteur.getSymbole() == "lire")
-        return instLire();
+    else if (m_lecteur.getSymbole() == "repeter") {
+        Noeud* inst;
+        try {
+            inst = instRepeter();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+               m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
+    else if (m_lecteur.getSymbole() == "pour"){
+        Noeud* inst;
+        try {
+            inst = instPour();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+               m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
+    else if (m_lecteur.getSymbole() == "ecrire"){
+        Noeud* inst;
+        try {
+            inst = instEcrire();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+               m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
+    else if (m_lecteur.getSymbole() == "lire") {
+        Noeud* inst;
+        try {
+            inst = instLire();
+        } catch (SyntaxeException & e){
+            m_syntaxError = true;
+            printf("%s\n",e.what());
+            while (m_lecteur.getSymbole()!="<VARIABLE>" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+               m_lecteur.avancer(); 
+            }
+        }
+        if (m_syntaxError) return nullptr;
+        return inst;
+    }
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
 }
@@ -141,33 +225,12 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSi() {
     // <instSi> ::= si ( <expression> ) <seqInst> finsi
-    try {
-        testerEtAvancer("si");
-    } catch (SyntaxeException & e){
-        m_syntaxError = true;
-        m_lecteur.avancer();
-    }
-    try {
-        testerEtAvancer("(");
-    } catch (SyntaxeException & e){
-        m_syntaxError = true;
-        m_lecteur.avancer();
-    }
+    testerEtAvancer("si");
+    testerEtAvancer("(");
     Noeud* condition = expression(); // On mémorise la condition
-    try {
-        testerEtAvancer(")");
-    } catch (SyntaxeException & e) {
-        m_syntaxError = true;
-        m_lecteur.avancer();
-    }
+    testerEtAvancer(")");
     Noeud* sequence = seqInst(); // On mémorise la séquence d'instruction
-    try {
-        testerEtAvancer("finsi");
-    } catch (SyntaxeException & e) {
-        m_syntaxError = true;
-        m_lecteur.avancer();
-    }
-    if (m_syntaxError) return nullptr;
+    testerEtAvancer("finsi");
     return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
 }
 
@@ -240,7 +303,6 @@ Noeud* Interpreteur::instEcrire() {
     Noeud* exp = nullptr ; 
 
     if (m_lecteur.getSymbole() == "<CHAINE>") {
-        //cout << "ICI : " << m_lecteur.getSymbole() << endl;
         chaine = m_table.chercheAjoute(m_lecteur.getSymbole());
         expV->ajouter(chaine);
         m_lecteur.avancer();
@@ -256,12 +318,10 @@ Noeud* Interpreteur::instEcrire() {
             expV->ajouter(chaine);
             m_lecteur.avancer();
         } else {
-            cout << "ICI : " << m_lecteur.getSymbole() << endl;
            exp = expression() ; 
            expV->ajouter(exp) ;
         }
          //m_lecteur.avancer();
-         cout << "ICI : " << m_lecteur.getSymbole() << endl;
     }
     testerEtAvancer(")"); 
     return expV ; 
