@@ -2,7 +2,7 @@
 # Les lignes de commentaires commencent par #
 procedure principale()
   i = 12+3;
-  si i>14)
+  si (i>14)
     j=1;
   finsi
   z = 0 ; 

@@ -141,16 +141,32 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSi() {
     // <instSi> ::= si ( <expression> ) <seqInst> finsi
-    testerEtAvancer("si");
+    try {
+        testerEtAvancer("si");
+    } catch (SyntaxeException & e){
+        m_syntaxError = true;
+        m_lecteur.avancer();
+    }
     try {
         testerEtAvancer("(");
     } catch (SyntaxeException & e){
         m_syntaxError = true;
+        m_lecteur.avancer();
     }
     Noeud* condition = expression(); // On mémorise la condition
-    testerEtAvancer(")");
+    try {
+        testerEtAvancer(")");
+    } catch (SyntaxeException & e) {
+        m_syntaxError = true;
+        m_lecteur.avancer();
+    }
     Noeud* sequence = seqInst(); // On mémorise la séquence d'instruction
-    testerEtAvancer("finsi");
+    try {
+        testerEtAvancer("finsi");
+    } catch (SyntaxeException & e) {
+        m_syntaxError = true;
+        m_lecteur.avancer();
+    }
     if (m_syntaxError) return nullptr;
     return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
 }
