@@ -146,7 +146,6 @@ Noeud* Interpreteur::instSi() {
         testerEtAvancer("(");
     } catch (SyntaxeException & e){
         m_syntaxError = true;
-        m_lecteur.avancer();
     }
     Noeud* condition = expression(); // On mémorise la condition
     testerEtAvancer(")");
